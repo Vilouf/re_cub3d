@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/22 11:37:27 by vielblin          #+#    #+#             */
-/*   Updated: 2025/09/23 18:54:25 by pespana          ###   ########.fr       */
+/*   Created: 2025/09/23 18:50:50 by pespana           #+#    #+#             */
+/*   Updated: 2025/09/23 18:51:52 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int ac, char **av)
+static void	ft_putchar_fd(char c, int fd)
 {
-	t_struct	data;
+	write(fd, &c, 1);
+}
 
-	if (ac != 2)
-		return (ft_putstr_fd("Args Error\n", 2), 1);
-	ft_memset(&data, 0, sizeof(t_struct));
-	init_gc(&(data.gc));
-	
-	return (free_exit(data.gc, 0), 0);
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t	i;
+
+	i = 0;
+	while (s && s[i])
+	{
+		ft_putchar_fd(s[i], fd);
+		i++;
+	}
 }
