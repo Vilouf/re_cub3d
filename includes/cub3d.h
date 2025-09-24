@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/09/23 18:52:09 by pespana          ###   ########.fr       */
+/*   Updated: 2025/09/24 16:31:22 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ typedef struct s_struct
 }	t_struct;
 
 //garbage collector
-void	gc_addback(t_gc_leaf **gc, t_gc_leaf *new);
-void	*gc_malloc(t_gc *gc, size_t size);
-void	gc_clear(t_gc_leaf **gc);
-void	init_gc(t_gc **gc);
-void	free_exit(t_gc *gc, int exit_status);
+void		gc_addback(t_gc_leaf **gc, t_gc_leaf *new);
+void		*gc_malloc(t_gc *gc, size_t size);
+void		gc_clear(t_gc_leaf **gc);
+void		init_gc(t_gc **gc);
+void		free_exit(t_gc *gc, int exit_status);
+t_gc_leaf	*gc_lstnew(void *data);
 
 //libft
 void	ft_free(void *ntpr);
@@ -56,5 +57,9 @@ size_t	ft_strlen2(const char *s);
 char	*ft_substr2(char const *s, unsigned int start, size_t len);
 void	*ft_calloc2(size_t count, size_t size);
 void	ft_putstr_fd(char *s, int fd);
+char	*ft_substr(t_gc *gc, char const *s, unsigned int start, size_t len);
+
+// parsing
+void	parsing(t_struct *data, char *file);
 
 #endif

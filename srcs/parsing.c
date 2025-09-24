@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/22 11:37:27 by vielblin          #+#    #+#             */
-/*   Updated: 2025/09/24 15:55:05 by vielblin         ###   ########.fr       */
+/*   Created: 2025/09/24 15:11:42 by vielblin          #+#    #+#             */
+/*   Updated: 2025/09/24 16:30:56 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int ac, char **av)
+void	parsing(t_struct *data, char *file)
 {
-	t_struct	data;
+	char	*line;
+	int		fd;
 
-	if (ac != 2)
-		return (ft_putstr_fd("Args Error\n", 2), 1);
-	ft_memset(&data, 0, sizeof(t_struct));
-	init_gc(&(data.gc));
-	parsing(&data, av[1]);
-	return (free_exit(data.gc, 0), 0);
+	fd = open(file, O_RDONLY);
+	line = get_next_line(fd);
+	gc_addback(&(data->gc->leaf), gc_lstnew((void *) line));
+	ft_putstr_fd(line, 1);
+	close(fd);
 }

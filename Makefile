@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pespana <pespana@student.42.fr>            +#+  +:+       +#+         #
+#    By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 11:32:48 by vielblin          #+#    #+#              #
-#    Updated: 2025/09/23 18:52:41 by pespana          ###   ########.fr        #
+#    Updated: 2025/09/24 16:31:57 by vielblin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,15 @@ INCLUDES = -I includes/
 SRCS_DIR = srcs/
 OBJS_DIR = objects/
 
-FILES = main
+FILES = main parsing
 
 GC_FILES = gc_malloc gc_clear gc_addback gc_init_free
 GC_DIR = gc/
 GC = $(addsuffix .c, $(GC_FILES))
 GC_PREF = $(addprefix $(SRCS_DIR)$(GC_DIR), $(GC))
 
-LIBFT_FILES = ft_free ft_memset get_next_line get_next_line_utils ft_putstr_fd
+LIBFT_FILES = ft_free ft_memset get_next_line get_next_line_utils ft_putstr_fd \
+			ft_substr
 LIBFT_DIR = libft/
 LIBFT = $(addsuffix .c, $(LIBFT_FILES))
 LIBFT_PREF = $(addprefix $(SRCS_DIR)$(LIBFT_DIR), $(LIBFT))
