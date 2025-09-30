@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/09/24 16:31:22 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/09/30 14:40:33 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ typedef struct s_gc
 typedef struct s_struct
 {
 	t_gc	*gc;
+	char	*txt_ne;
+	char	*txt_so;
+	char	*txt_ea;
+	char	*txt_we;
+	int		color_f[3];
+	int		color_c[3];
+	char	**map;
 }	t_struct;
 
 //garbage collector
