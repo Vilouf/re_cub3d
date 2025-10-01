@@ -1,7 +1,7 @@
-NE ./texture1.jsp
+NO ./texture1.jsp
 SO ./texture2.jsp
-EA ./texture3.jsp
-WE ./texture4.jsp
+WE ./texture3.jsp
+EA ./texture4.jsp
 
 F 255,255,255
 C 0,0,0

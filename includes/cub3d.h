@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/09/30 14:40:33 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:32:48 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ typedef struct s_gc
 typedef struct s_struct
 {
 	t_gc	*gc;
-	char	*txt_ne;
+	char	*txt_no;
 	char	*txt_so;
-	char	*txt_ea;
 	char	*txt_we;
+	char	*txt_ea;
 	int		color_f[3];
 	int		color_c[3];
 	char	**map;
@@ -65,6 +65,9 @@ char	*ft_substr2(char const *s, unsigned int start, size_t len);
 void	*ft_calloc2(size_t count, size_t size);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_substr(t_gc *gc, char const *s, unsigned int start, size_t len);
+char	**ft_split(char const *s, char c, t_gc *gc);
+int		ft_strcmp(char *s1, char *s2);
+int		ft_atoi(const char *nptr);
 
 // parsing
 void	parsing(t_struct *data, char *file);
