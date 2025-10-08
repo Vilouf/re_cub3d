@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/01 17:32:48 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/08 13:08:31 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	*ft_substr(t_gc *gc, char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c, t_gc *gc);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(const char *nptr);
+char	*ft_strdup(t_gc *gc, const char *s);
 
 // parsing
 void	parsing(t_struct *data, char *file);

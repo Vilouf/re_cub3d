@@ -6,7 +6,7 @@
 #    By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 11:32:48 by vielblin          #+#    #+#              #
-#    Updated: 2025/10/01 17:33:02 by vielblin         ###   ########.fr        #
+#    Updated: 2025/10/08 15:09:47 by vielblin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ GC = $(addsuffix .c, $(GC_FILES))
 GC_PREF = $(addprefix $(SRCS_DIR)$(GC_DIR), $(GC))
 
 LIBFT_FILES = ft_free ft_memset get_next_line get_next_line_utils ft_putstr_fd \
-			ft_substr ft_split ft_strcmp ft_atoi
+			ft_substr ft_split ft_strcmp ft_atoi ft_strdup
 LIBFT_DIR = libft/
 LIBFT = $(addsuffix .c, $(LIBFT_FILES))
 LIBFT_PREF = $(addprefix $(SRCS_DIR)$(LIBFT_DIR), $(LIBFT))
