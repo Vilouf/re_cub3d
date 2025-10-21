@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/08 13:08:31 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/20 22:30:13 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,16 @@ typedef struct s_gc
 	int			id;
 }	t_gc;
 
+typedef struct s_list
+{
+	char			*data;
+	struct s_list	*next;
+}	t_list;
+
 typedef struct s_struct
 {
 	t_gc	*gc;
+	t_list	*lst_map;
 	char	*txt_no;
 	char	*txt_so;
 	char	*txt_we;
@@ -69,6 +76,8 @@ char	**ft_split(char const *s, char c, t_gc *gc);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_atoi(const char *nptr);
 char	*ft_strdup(t_gc *gc, const char *s);
+t_list	*ft_lstnew(t_gc *gc, void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new);
 
 // parsing
 void	parsing(t_struct *data, char *file);

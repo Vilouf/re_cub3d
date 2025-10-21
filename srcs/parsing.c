@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:11:42 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/08 15:08:10 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/21 02:41:34 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	check_id(t_struct *data, char **words)
 	return (1);
 }
 
-int	set_map(t_struct *data, char *line)
+int	check_map(t_struct *data, char *line)
 {
 	int	i;
 
@@ -93,13 +93,92 @@ int	set_map(t_struct *data, char *line)
 	(void) data;
 	while (line[i])
 	{
-		if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
+		if (line[i] != '1' && line[i] != '0' && line[i] != ' '
+			&& line[i] != 'N' && line[i] != 'S' && line[i] != 'W' 
+			&& line[i] != 'E' && line[i] != '\n')
 			return (0);
 		i++;
 	}
+	ft_lstadd_back(&(data->lst_map), \
+		ft_lstnew(data->gc, ft_strdup(data->gc, line)));
 	return (1);
-	//ici il faudra mettre un prototype de la map qu'on mettra en carre juste apres
-	//faut il read plusieurs fois map.cub pour determiner le nombre de lignes?
+}
+
+int	ft_strlen(char *s)
+{
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
+}
+
+char	*set_map_line(char *line, int x, t_gc *gc)
+{
+	char	*ret;
+	int		i;
+
+	i = 0;
+	ret = gc_malloc(gc, (x + 1) * sizeof(char));
+	while  (i < x)
+	{
+		if (i < ft_strlen(line))
+		{
+			if (line[i] != ' ')
+				ret[i] = line[i];
+			else
+				ret[i] = '2';
+		}
+		else
+			ret[i] = '2';
+		i++;
+	}
+	ret[i] = 0;
+	return (ret);
+}
+
+void	set_map(t_struct *data, int x)
+{
+	t_list	*tmp;
+	int		i;
+
+	tmp = data->lst_map;
+	i = 0;
+	while (tmp)
+	{
+		data->map[i] = set_map_line(tmp->data, x, data->gc);
+		i++;
+		tmp = tmp->next;
+	}
+	data->map[i] = NULL;
+}
+
+void	parse_map(t_struct *data)
+{
+	int		i;
+	int		x;
+	int		y;
+	t_list	*tmp;
+
+	tmp = data->lst_map;
+	x = 0;
+	y = 0;
+	i = 0;
+	while (tmp)
+	{
+		while (tmp->data[i])
+			i++;
+		if (i > x)
+			x = i;
+		i = 0;
+		y++;
+		tmp = tmp->next;
+	}
+	data->map = gc_malloc(data->gc, (y + 1) * sizeof(char *));
+	set_map(data, x);
 }
 
 void	ft_print_elements(t_struct *data)
@@ -110,6 +189,22 @@ void	ft_print_elements(t_struct *data)
 	printf("EA: %s\n", data->txt_ea);
 	printf("F: %d,%d,%d\n", data->color_f[0], data->color_f[1], data->color_f[2]);
 	printf("C: %d,%d,%d\n", data->color_c[0], data->color_c[1], data->color_c[2]);
+
+	// t_list	*test = data->lst_map;
+
+	// while (test)
+	// {
+	// 	printf("%s\n", test->data);
+	// 	test = test->next;
+	// }
+	for(int i = 0; data->map[i]; i++)
+	{
+		for(int j = 0; data->map[i][j]; j++)
+		{
+			write(1, &data->map[i][j], 1);
+		}
+		write(1, "\n", 1);
+	}
 }
 
 void	parsing(t_struct *data, char *file)
@@ -126,15 +221,14 @@ void	parsing(t_struct *data, char *file)
 		ft_free(line);
 		line = get_next_line(fd);
 	}
-	ft_free(line);
-	ft_print_elements(data);
-	line = get_next_line(fd);
 	while (line)
 	{
-		set_map(data, line);
+		check_map(data, line);
 		ft_free(line);
 		line = get_next_line(fd);
 	}
 	ft_free(line);
+	parse_map(data);
+	ft_print_elements(data);
 	close(fd);
 }
