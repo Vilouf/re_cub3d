@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:11:42 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/21 02:41:34 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/29 15:26:27 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,51 @@ int	check_color_nums(char **nums)
 	int	j;
 
 	i = 0;
-	j = 0;
 	if (!nums)
 		return (0);
 	while (nums[i])
 	{
-		if (i == 3)
+		j = 0;
+		if (i == 3 || nums[i][j] == 0 || nums[i][j] == '\n')
 			return (0);
 		while (nums[i][j])
 		{
-			if (nums[i][j] < '0' || nums[i][j] > '9' || j > 2)
+			if (((nums[i][j] < '0' || nums[i][j] > '9') && nums[i][j] != '\n') || j > 3)
+			{
 				return (0);
+			}
 			j++;
 		}
 		i++;
 	}
+	if (i < 3)
+		return (0);
 	return (1);
 }
 
-int	get_color(t_struct *data, char* color, int type)
+int	get_color(t_struct *data, char *color, int type)
 {
 	char	**nums;
 	int	i;
 
+	if (type == 1)
+	{
+		if (data->color_f[0] != -1)
+		{
+			data->color_f[0] = -1;
+			return (0);
+		}
+	}
+	else
+	{
+		if (data->color_c[0] != -1)
+		{
+			data->color_c[0] = -1;
+			return (0);
+		}
+	}
 	nums = ft_split(color, ',', data->gc);
-	if (check_color_nums(nums))
+	if (!check_color_nums(nums))
 		return (0);
 	i = 0;
 	while (i < 3)
@@ -62,18 +82,38 @@ int	check_id(t_struct *data, char **words)
 		return (1);
 	if (!ft_strcmp(words[0], "NO"))
 	{
+		if (data->txt_no != NULL)
+		{
+			data->txt_no = NULL;
+			return (0);
+		}
 		data->txt_no = ft_strdup(data->gc, words[1]);
 	}
 	else if (!ft_strcmp(words[0], "SO"))
 	{
+		if (data->txt_so != NULL)
+		{
+			data->txt_so = NULL;
+			return (0);
+		}
 		data->txt_so = ft_strdup(data->gc, words[1]);
 	}
 	else if (!ft_strcmp(words[0], "WE"))
 	{
+		if (data->txt_we != NULL)
+		{
+			data->txt_we = NULL;
+			return (0);
+		}
 		data->txt_we = ft_strdup(data->gc, words[1]);
 	}
 	else if (!ft_strcmp(words[0], "EA"))
 	{
+		if (data->txt_ea != NULL)
+		{
+			data->txt_ea = NULL;
+			return (0);
+		}
 		data->txt_ea = ft_strdup(data->gc, words[1]);
 	}
 	else if (!ft_strcmp(words[0], "F"))
@@ -90,7 +130,6 @@ int	check_map(t_struct *data, char *line)
 	int	i;
 
 	i = 0;
-	(void) data;
 	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != ' '
@@ -207,6 +246,24 @@ void	ft_print_elements(t_struct *data)
 	}
 }
 
+int	check_data(t_struct *data)
+{
+	int	i;
+
+	if (data->txt_no == NULL || data->txt_so == NULL || data->txt_we == NULL || data->txt_ea == NULL)
+		return (0);
+	i = 0;
+	while (i < 3)
+	{
+		if (data->color_c[i] < 0 || data->color_c[i] > 255)
+			return (0);
+		if (data->color_f[i] < 0 || data->color_f[i] > 255)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	parsing(t_struct *data, char *file)
 {
 	char	*line;
@@ -221,14 +278,26 @@ void	parsing(t_struct *data, char *file)
 		ft_free(line);
 		line = get_next_line(fd);
 	}
+	if (!check_data(data))
+	{
+		ft_free(line);
+		free_exit(data->gc, 1, "Error: Invalid Data\n");
+	}
 	while (line)
 	{
-		check_map(data, line);
+		if (!check_map(data, line))
+		{
+			ft_free(line);
+			free_exit(data->gc, 1, "Error: Invalid Map\n");
+		}
 		ft_free(line);
 		line = get_next_line(fd);
+		if (!line || !ft_strcmp(line, "\n"))
+			break ;
 	}
 	ft_free(line);
 	parse_map(data);
+	// le parsing avant la map nest peut etre pas fini mais il faudra aussi verifier la map
 	ft_print_elements(data);
 	close(fd);
 }

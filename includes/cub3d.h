@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/20 22:30:13 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/29 09:39:00 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		gc_addback(t_gc_leaf **gc, t_gc_leaf *new);
 void		*gc_malloc(t_gc *gc, size_t size);
 void		gc_clear(t_gc_leaf **gc);
 void		init_gc(t_gc **gc);
-void		free_exit(t_gc *gc, int exit_status);
+void		free_exit(t_gc *gc, int exit_status, char *message);
 t_gc_leaf	*gc_lstnew(void *data);
 
 //libft

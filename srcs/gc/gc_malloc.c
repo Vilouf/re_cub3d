@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:45:49 by pespana           #+#    #+#             */
-/*   Updated: 2025/09/24 16:29:49 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/29 10:14:09 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ void	*gc_malloc(t_gc *gc, size_t size)
 	head = gc;
 	ret = gc_malloc2(&(gc->leaf), size);
 	if (!ret)
-		free_exit(gc, 1);
+		free_exit(gc, 1, "Malloc Error\n");
 	return (ret);
 }
