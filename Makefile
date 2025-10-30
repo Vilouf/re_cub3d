@@ -6,13 +6,13 @@
 #    By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 11:32:48 by vielblin          #+#    #+#              #
-#    Updated: 2025/10/21 01:15:37 by vielblin         ###   ########.fr        #
+#    Updated: 2025/10/30 14:29:00 by vielblin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 LIBS = -lreadline
 
 INCLUDES = -I includes/
@@ -28,7 +28,8 @@ GC = $(addsuffix .c, $(GC_FILES))
 GC_PREF = $(addprefix $(SRCS_DIR)$(GC_DIR), $(GC))
 
 LIBFT_FILES = ft_free ft_memset get_next_line get_next_line_utils ft_putstr_fd \
-			ft_substr ft_split ft_strcmp ft_atoi ft_strdup ft_lstadd_back
+			ft_substr ft_split ft_strcmp ft_atoi ft_strdup ft_lstadd_back \
+			ft_strlen
 LIBFT_DIR = libft/
 LIBFT = $(addsuffix .c, $(LIBFT_FILES))
 LIBFT_PREF = $(addprefix $(SRCS_DIR)$(LIBFT_DIR), $(LIBFT))

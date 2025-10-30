@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:37:27 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/29 14:22:08 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/30 09:38:39 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	t_struct	data;
 
 	if (ac != 2)
-		return (ft_putstr_fd("Args Error\n", 2), 1);
+		return (ft_putstr_fd("Error\nWrong Args", 2), 1);
 	ft_memset(&data, 0, sizeof(t_struct));
 	init_gc(&(data.gc));
 	init_colors(&data);

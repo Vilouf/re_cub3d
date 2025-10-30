@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 15:11:42 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/29 15:26:27 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/30 13:49:48 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,64 @@ int	check_color_nums(char **nums)
 	return (1);
 }
 
-int	get_color(t_struct *data, char *color, int type)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (!dest && !src)
+		return (NULL);
+	while (i < n)
+	{
+		((char *)dest)[i] = ((const char *)src)[i];
+		i++;
+	}
+	return (dest);
+}
+
+char	*strjoin_tab(t_gc *gc, char **tab)
+{
+	int		len;
+	int		i;
+	int		j;
+	char	*ret;
+
+	len = 0;
+	i = 0;
+	while (tab[i])
+	{
+		len += ft_strlen(tab[i]);
+		i++;
+	}
+	ret = gc_malloc(gc, len + 1 * sizeof(char));
+	j = 0;
+	i = 0;
+	while (tab[i])
+	{
+		ft_memcpy(&ret[j], tab[i], ft_strlen2(tab[i]));
+		j += ft_strlen(tab[i]);
+		i++;
+	}
+	return (ret);
+}
+
+int	get_color(t_struct *data, char **tab, int type)
 {
 	char	**nums;
+	char	*color;
 	int	i;
 
-	if (type == 1)
+	if (type == 1 && data->color_f[0] != -1)
 	{
-		if (data->color_f[0] != -1)
-		{
-			data->color_f[0] = -1;
-			return (0);
-		}
+		data->color_f[0] = -1;
+		return (0);
 	}
-	else
+	else if (type != 1 && data->color_c[0] != -1)
 	{
-		if (data->color_c[0] != -1)
-		{
-			data->color_c[0] = -1;
-			return (0);
-		}
+		data->color_c[0] = -1;
+		return (0);
 	}
+	color = strjoin_tab(data->gc, tab);
 	nums = ft_split(color, ',', data->gc);
 	if (!check_color_nums(nums))
 		return (0);
@@ -117,9 +154,9 @@ int	check_id(t_struct *data, char **words)
 		data->txt_ea = ft_strdup(data->gc, words[1]);
 	}
 	else if (!ft_strcmp(words[0], "F"))
-		return (get_color(data, words[1], 1));
+		return (get_color(data, &words[1], 1));
 	else if (!ft_strcmp(words[0], "C"))
-		return (get_color(data, words[1], 2));
+		return (get_color(data, &words[1], 2));
 	else
 		return (0);
 	return (1);
@@ -143,18 +180,6 @@ int	check_map(t_struct *data, char *line)
 	return (1);
 }
 
-int	ft_strlen(char *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i])
-		i++;
-	return (i);
-}
-
 char	*set_map_line(char *line, int x, t_gc *gc)
 {
 	char	*ret;
@@ -165,14 +190,9 @@ char	*set_map_line(char *line, int x, t_gc *gc)
 	while  (i < x)
 	{
 		if (i < ft_strlen(line))
-		{
-			if (line[i] != ' ')
-				ret[i] = line[i];
-			else
-				ret[i] = '2';
-		}
+			ret[i] = line[i];
 		else
-			ret[i] = '2';
+			ret[i] = ' ';
 		i++;
 	}
 	ret[i] = 0;
@@ -264,12 +284,24 @@ int	check_data(t_struct *data)
 	return (1);
 }
 
+void	check_map_extention(t_struct *data, char *file)
+{
+	int	len;
+
+	len = ft_strlen(file);
+	if (ft_strcmp(&file[len - 4], ".cub") != 0)
+		free_exit(data->gc, 1, "Error\nWrong file extention\n");
+}
+
 void	parsing(t_struct *data, char *file)
 {
 	char	*line;
 	int		fd;
 
+	check_map_extention(data, file);
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		free_exit(data->gc, 1, "Error\nInvalid file name\n");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -281,19 +313,29 @@ void	parsing(t_struct *data, char *file)
 	if (!check_data(data))
 	{
 		ft_free(line);
-		free_exit(data->gc, 1, "Error: Invalid Data\n");
+		free_exit(data->gc, 1, "Error\nInvalid Data\n");
 	}
 	while (line)
 	{
 		if (!check_map(data, line))
 		{
 			ft_free(line);
-			free_exit(data->gc, 1, "Error: Invalid Map\n");
+			free_exit(data->gc, 1, "Error\nInvalid Map\n");
 		}
 		ft_free(line);
 		line = get_next_line(fd);
 		if (!line || !ft_strcmp(line, "\n"))
 			break ;
+	}
+	while (line)
+	{
+		if (ft_strcmp(line, "\n"))
+		{
+			ft_free(line);
+			free_exit(data->gc, 1, "Error\nMap is not last element!\n");
+		}
+		ft_free(line);
+		line = get_next_line(fd);
 	}
 	ft_free(line);
 	parse_map(data);

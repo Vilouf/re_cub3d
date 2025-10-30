@@ -6,11 +6,31 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 15:51:13 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/01 16:34:39 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/30 10:16:15 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
+
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while (str1[i] && str2[i] && i < n)
+	{
+		if (str1[i] != str2[i])
+			return (str1[i] - str2[i]);
+		i++;
+	}
+	if (n == i)
+		return (0);
+	return (str1[i] - str2[i]);
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {

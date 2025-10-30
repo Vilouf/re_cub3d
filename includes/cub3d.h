@@ -6,7 +6,7 @@
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/29 09:39:00 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/30 13:21:59 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,14 @@ char	*get_next_line(int fd);
 char	*ft_strchr2(const char *s, int c);
 char	*ft_strjoin2(char *s1, char *s2);
 size_t	ft_strlen2(const char *s);
+int		ft_strlen(char *s);
 char	*ft_substr2(char const *s, unsigned int start, size_t len);
 void	*ft_calloc2(size_t count, size_t size);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_substr(t_gc *gc, char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c, t_gc *gc);
 int		ft_strcmp(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
 char	*ft_strdup(t_gc *gc, const char *s);
 t_list	*ft_lstnew(t_gc *gc, void *content);

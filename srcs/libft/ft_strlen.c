@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_init_free.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 04:58:24 by pespana           #+#    #+#             */
-/*   Updated: 2025/10/30 09:39:08 by vielblin         ###   ########.fr       */
+/*   Created: 2025/10/30 13:21:41 by vielblin          #+#    #+#             */
+/*   Updated: 2025/10/30 13:21:49 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_exit(t_gc *gc, int exit_status, char *message)
+int	ft_strlen(char *s)
 {
-	if (message)
-		ft_putstr_fd(message, 2);
-	if (gc != NULL)
-	{
-		gc_clear(&(gc->leaf));
-		ft_free(gc);
-	}
-	exit(exit_status);
-}
+	size_t	i;
 
-void	init_gc(t_gc **gc)
-{
-	t_gc	*current;
-
-	current = NULL;
-	current = malloc(sizeof(t_gc));
-	if (!current)
-		free_exit(*gc, 1, "Malloc Error\n");
-	ft_memset(current, 0, sizeof(t_gc));
-	*gc = current;
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
 }
