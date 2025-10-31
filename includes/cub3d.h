@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/30 13:21:59 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/10/31 07:26:36 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,19 @@
 #  define BUFFER_SIZE 1
 # endif
 
+# ifndef WIN_WIDTH
+#  define WIN_WIDTH 1024
+# endif
+
+# ifndef WIN_HEIGHT
+# define WIN_HEIGHT 768
+# endif
+
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <mlx.h>
 
 typedef struct s_gc_leaf
 {
@@ -51,6 +60,13 @@ typedef struct s_struct
 	int		color_f[3];
 	int		color_c[3];
 	char	**map;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
+	char	*img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }	t_struct;
 
 //garbage collector
