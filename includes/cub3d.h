@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
+/*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/31 07:26:36 by pespana          ###   ########.fr       */
+/*   Updated: 2025/10/31 10:443:566 by vielblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@
 # define WIN_HEIGHT 768
 # endif
 
+# ifndef KEY_ESC
+#  define KEY_ESC 65307
+# endif
+
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <mlx.h>
+# include <stdbool.h>
+# include <MLX42/MLX42.h>
 
 typedef struct s_gc_leaf
 {
@@ -99,5 +104,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 
 // parsing
 void	parsing(t_struct *data, char *file);
+
+//init mlx
+void	init_mlx(t_struct *data);
+
+//event 
+int		handle_keypress(int keycode, t_struct *data);
+int		handle_close_window(t_struct *data);
 
 #endif

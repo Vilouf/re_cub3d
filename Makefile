@@ -3,24 +3,24 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+         #
+#    By: pespana <pespana@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 11:32:48 by vielblin          #+#    #+#              #
-#    Updated: 2025/10/30 14:29:00 by vielblin         ###   ########.fr        #
+#    Updated: 2025/10/31 10:36:34 by pespana          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
 FLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
-LIBS = -lreadline
+LIBS = ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-INCLUDES = -I includes/
+INCLUDES = -I includes/ -I MLX42/include
 
 SRCS_DIR = srcs/
 OBJS_DIR = objects/
 
-FILES = main parsing
+FILES = main #parsing init_mlx key_handle
 
 GC_FILES = gc_malloc gc_clear gc_addback gc_init_free
 GC_DIR = gc/
@@ -34,7 +34,7 @@ LIBFT_DIR = libft/
 LIBFT = $(addsuffix .c, $(LIBFT_FILES))
 LIBFT_PREF = $(addprefix $(SRCS_DIR)$(LIBFT_DIR), $(LIBFT))
 
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES))) $(GC_PREF) $(LIBFT_PREF)
+SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES))) #$(GC_PREF) $(LIBFT_PREF)
 
 OBJS = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 
