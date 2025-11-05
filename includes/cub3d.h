@@ -58,6 +58,7 @@ typedef struct s_struct
 {
 	t_gc		*gc;
 	t_list		*lst_map;
+	int			fd;
 	char		*txt_no;
 	char		*txt_so;
 	char		*txt_we;
@@ -107,6 +108,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 
 // parsing
 void	parsing(t_struct *data, char *file);
+int		check_id(t_struct *data, char **words);
+int		check_data(t_struct *data);
+int		get_color(t_struct *data, char **tab, int type);
+int		is_spawn_point(char c);
+void	parse_map(t_struct *data);
+int		is_map_valid(t_struct *data);
 
 //init mlx
 void	init_mlx(t_struct *data);
