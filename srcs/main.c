@@ -27,15 +27,15 @@ int	main(int ac, char **av)
 	t_struct	data;
 
 	if (ac != 2)
-		return (ft_putstr_fd("Error\nWrong Args", 2), 1);
+		return (ft_putstr_fd("Error\nWrong Args\n", 2), 1);
 	ft_memset(&data, 0, sizeof(t_struct));
 	init_gc(&(data.gc));
 	init_colors(&data);
 	parsing(&data, av[1]);
-	init_mlx(&data);
-	mlx_hook(data.win_ptr, 2, (1L << 0), handle_keypress, &data);
-	mlx_hook(data.win_ptr, 17, (1L << 0), handle_close_window, &data);
-	mlx_loop(data.mlx_ptr);
+	// init_mlx(&data);
+	// mlx_hook(data.win_ptr, 2, (1L << 0), handle_keypress, &data);
+	// mlx_hook(data.win_ptr, 17, (1L << 0), handle_close_window, &data);
+	// mlx_loop(data.mlx_ptr);
 	return (free_exit(data.gc, 0, NULL), 0);
 }
 

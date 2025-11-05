@@ -56,22 +56,25 @@ typedef struct s_list
 
 typedef struct s_struct
 {
-	t_gc	*gc;
-	t_list	*lst_map;
-	char	*txt_no;
-	char	*txt_so;
-	char	*txt_we;
-	char	*txt_ea;
-	int		color_f[3];
-	int		color_c[3];
-	char	**map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-	char	*img_addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	t_gc		*gc;
+	t_list		*lst_map;
+	char		*txt_no;
+	char		*txt_so;
+	char		*txt_we;
+	char		*txt_ea;
+	int			color_f[3];
+	int			color_c[3];
+	char		**map;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	void		*img_ptr;
+	char		*img_addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	float		x_pos;
+	float		y_pos;
+	float		angle;
 }	t_struct;
 
 //garbage collector

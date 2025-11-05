@@ -20,7 +20,7 @@ INCLUDES = -I includes/ -I MLX42/include
 SRCS_DIR = srcs/
 OBJS_DIR = objects/
 
-FILES = main #parsing init_mlx key_handle
+FILES = main parsing #init_mlx key_handle
 
 GC_FILES = gc_malloc gc_clear gc_addback gc_init_free
 GC_DIR = gc/
@@ -34,7 +34,7 @@ LIBFT_DIR = libft/
 LIBFT = $(addsuffix .c, $(LIBFT_FILES))
 LIBFT_PREF = $(addprefix $(SRCS_DIR)$(LIBFT_DIR), $(LIBFT))
 
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES))) #$(GC_PREF) $(LIBFT_PREF)
+SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES))) $(GC_PREF) $(LIBFT_PREF)
 
 OBJS = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 
