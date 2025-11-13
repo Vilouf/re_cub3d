@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:32:29 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/14 00:10:51 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/14 00:52:02 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*set_map_line(char *line, int x, t_gc *gc)
 	ret = gc_malloc(gc, (x + 1) * sizeof(char));
 	while (i < x)
 	{
-		if (i < ft_strlen(line))
+		if (i < ft_strlen(line) && line[i] != ' ')
 			ret[i] = line[i];
 		else
 			ret[i] = '1';

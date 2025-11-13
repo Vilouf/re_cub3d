@@ -6,13 +6,13 @@
 #    By: pespana <pespana@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 11:32:48 by vielblin          #+#    #+#              #
-#    Updated: 2025/11/13 23:59:36 by pespana          ###   ########.fr        #
+#    Updated: 2025/11/14 00:21:22 by pespana          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 CC = cc
-FLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 LIBS = ./MLX42/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 INCLUDES = -I includes/ -I MLX42/include
