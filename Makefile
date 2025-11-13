@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+         #
+#    By: pespana <pespana@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 11:32:48 by vielblin          #+#    #+#              #
-#    Updated: 2025/11/05 14:41:48 by vielblin         ###   ########.fr        #
+#    Updated: 2025/11/13 22:43:40 by pespana          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCLUDES = -I includes/ -I MLX42/include
 SRCS_DIR = srcs/
 OBJS_DIR = objects/
 
-FILES = main #parsing init_mlx key_handle
+FILES = main game_loop
 
 GC_FILES = gc_malloc gc_clear gc_addback gc_init_free
 GC_DIR = gc/

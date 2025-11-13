@@ -21,6 +21,14 @@
 #  define WIN_WIDTH 1024
 # endif
 
+# ifndef MOVE_SPEED
+#  define MOVE_SPEED 0.05
+# endif
+
+# ifndef ROT_SPEED
+#  define ROT_SPEED 0.03
+# endif
+
 # ifndef WIN_HEIGHT
 # define WIN_HEIGHT 768
 # endif
@@ -35,6 +43,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <MLX42/MLX42.h>
+# include <math.h>
 
 typedef struct s_gc_leaf
 {
@@ -54,6 +63,28 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_ray
+{
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	float	camera_x;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	perp_wall_dist;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int32_t	color;
+}	t_ray;
+
 typedef struct s_struct
 {
 	t_gc		*gc;
@@ -66,16 +97,14 @@ typedef struct s_struct
 	int			color_f[3];
 	int			color_c[3];
 	char		**map;
-	void		*mlx_ptr;
-	void		*win_ptr;
-	void		*img_ptr;
-	char		*img_addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 	float		x_pos;
 	float		y_pos;
-	float		angle;
+	float		dir_x;
+	float		dir_y;
+	float		plane_x;
+	float		plane_y;
 }	t_struct;
 
 //garbage collector
@@ -115,11 +144,7 @@ int		is_spawn_point(char c);
 void	parse_map(t_struct *data);
 int		is_map_valid(t_struct *data);
 
-//init mlx
-void	init_mlx(t_struct *data);
-
-//event 
-int		handle_keypress(int keycode, t_struct *data);
-int		handle_close_window(t_struct *data);
+// game
+void	game_hook(void *param);
 
 #endif

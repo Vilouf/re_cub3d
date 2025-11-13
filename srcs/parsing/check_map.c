@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:34:34 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/05 14:46:12 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/11/13 22:25:46 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,36 @@ static int	set_player_data(t_struct *data, int x, int y)
 		return (0);
 	if (data->x_pos != 0 || data->y_pos != 0)
 		free_exit(data->gc, 2, "Error\nMore than one spawn point\n");
-	data->x_pos = (float) x;
-	data->y_pos = (float) y;
+	data->x_pos = (float)x + 0.5;
+	data->y_pos = (float)y + 0.5;
 	if (data->map[y][x] == 'N')
-		data->angle = (float) 90;
+	{
+		data->dir_x = 0;
+		data->dir_y = -1;
+		data->plane_x = 0.66;
+		data->plane_y = 0;
+	}
 	else if (data->map[y][x] == 'S')
-		data->angle = (float) 270;
+	{
+		data->dir_x = 0;
+		data->dir_y = 1;
+		data->plane_x = -0.66;
+		data->plane_y = 0;
+	}
 	else if (data->map[y][x] == 'W')
-		data->angle = (float) 180;
+	{
+		data->dir_x = -1;
+		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = -0.66;
+	}
 	else if (data->map[y][x] == 'E')
-		data->angle = (float) 0;
+	{
+		data->dir_x = 1;
+		data->dir_y = 0;
+		data->plane_x = 0;
+		data->plane_y = 0.66;
+	}
 	return (1);
 }
 
