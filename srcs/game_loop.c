@@ -6,11 +6,16 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 22:34:18 by pespana           #+#    #+#             */
-/*   Updated: 2025/11/13 22:45:07 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/13 22:50:59 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int32_t	get_rgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
+}
 
 static void	init_ray(t_struct *data, t_ray *ray, int x)
 {
@@ -171,59 +176,59 @@ static void	handle_movement(t_struct *data)
 	}
 }
 
-static void	move_forward_backward(t_struct *data)
-{
-	float	new_x;
-	float	new_y;
+// static void	move_forward_backward(t_struct *data)
+// {
+// 	float	new_x;
+// 	float	new_y;
 
-	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-	{
-		new_x = data->x_pos + data->dir_x * MOVE_SPEED;
-		new_y = data->y_pos + data->dir_y * MOVE_SPEED;
-		if (data->map[(int)new_y][(int)new_x] != '1')
-		{
-			data->x_pos = new_x;
-			data->y_pos = new_y;
-		}
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-	{
-		new_x = data->x_pos - data->dir_x * MOVE_SPEED;
-		new_y = data->y_pos - data->dir_y * MOVE_SPEED;
-		if (data->map[(int)new_y][(int)new_x] != '1')
-		{
-			data->x_pos = new_x;
-			data->y_pos = new_y;
-		}
-	}
-}
+// 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+// 	{
+// 		new_x = data->x_pos + data->dir_x * MOVE_SPEED;
+// 		new_y = data->y_pos + data->dir_y * MOVE_SPEED;
+// 		if (data->map[(int)new_y][(int)new_x] != '1')
+// 		{
+// 			data->x_pos = new_x;
+// 			data->y_pos = new_y;
+// 		}
+// 	}
+// 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+// 	{
+// 		new_x = data->x_pos - data->dir_x * MOVE_SPEED;
+// 		new_y = data->y_pos - data->dir_y * MOVE_SPEED;
+// 		if (data->map[(int)new_y][(int)new_x] != '1')
+// 		{
+// 			data->x_pos = new_x;
+// 			data->y_pos = new_y;
+// 		}
+// 	}
+// }
 
-static void	move_strafe(t_struct *data)
-{
-	float	new_x;
-	float	new_y;
+// static void	move_strafe(t_struct *data)
+// {
+// 	float	new_x;
+// 	float	new_y;
 
-	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-	{
-		new_x = data->x_pos - data->plane_x * MOVE_SPEED;
-		new_y = data->y_pos - data->plane_y * MOVE_SPEED;
-		if (data->map[(int)new_y][(int)new_x] != '1')
-		{
-			data->x_pos = new_x;
-			data->y_pos = new_y;
-		}
-	}
-	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-	{
-		new_x = data->x_pos + data->plane_x * MOVE_SPEED;
-		new_y = data->y_pos + data->plane_y * MOVE_SPEED;
-		if (data->map[(int)new_y][(int)new_x] != '1')
-		{
-			data->x_pos = new_x;
-			data->y_pos = new_y;
-		}
-	}
-}
+// 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+// 	{
+// 		new_x = data->x_pos - data->plane_x * MOVE_SPEED;
+// 		new_y = data->y_pos - data->plane_y * MOVE_SPEED;
+// 		if (data->map[(int)new_y][(int)new_x] != '1')
+// 		{
+// 			data->x_pos = new_x;
+// 			data->y_pos = new_y;
+// 		}
+// 	}
+// 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+// 	{
+// 		new_x = data->x_pos + data->plane_x * MOVE_SPEED;
+// 		new_y = data->y_pos + data->plane_y * MOVE_SPEED;
+// 		if (data->map[(int)new_y][(int)new_x] != '1')
+// 		{
+// 			data->x_pos = new_x;
+// 			data->y_pos = new_y;
+// 		}
+// 	}
+// }
 
 static void	rotate_player(t_struct *data, float angle)
 {
@@ -251,6 +256,33 @@ static void	handle_rotation(t_struct *data)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 	{
 		rotate_player(data, -ROT_SPEED);
+	}
+}
+
+static void	draw_floor_and_ceiling(t_struct *data)
+{
+	int		x;
+	int		y;
+	int32_t	floor_color;
+	int32_t	ceiling_color;
+
+	floor_color = get_rgba(data->color_f[0], data->color_f[1], 
+			data->color_f[2], 255);
+	ceiling_color = get_rgba(data->color_c[0], data->color_c[1], 
+			data->color_c[2], 255);
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			if (y < WIN_HEIGHT / 2)
+				mlx_put_pixel(data->img, x, y, ceiling_color);
+			else
+				mlx_put_pixel(data->img, x, y, floor_color);
+			x++;
+		}
+		y++;
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:15 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/05 15:14:44 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/11/13 22:51:42 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,26 @@ static void	read_data(t_struct *data, int fd)
 	read_map(data, line, fd);
 }
 
-//TEST FUNCTION
-void	ft_print_elements(t_struct *data)
-{
-	printf("NO: %s\n", data->txt_no);
-	printf("SO: %s\n", data->txt_so);
-	printf("WE: %s\n", data->txt_we);
-	printf("EA: %s\n", data->txt_ea);
-	printf("F: %d,%d,%d\n", data->color_f[0], data->color_f[1], data->color_f[2]);
-	printf("C: %d,%d,%d\n", data->color_c[0], data->color_c[1], data->color_c[2]);
+// //TEST FUNCTION
+// void	ft_print_elements(t_struct *data)
+// {
+// 	printf("NO: %s\n", data->txt_no);
+// 	printf("SO: %s\n", data->txt_so);
+// 	printf("WE: %s\n", data->txt_we);
+// 	printf("EA: %s\n", data->txt_ea);
+// 	printf("F: %d,%d,%d\n", data->color_f[0], data->color_f[1], data->color_f[2]);
+// 	printf("C: %d,%d,%d\n", data->color_c[0], data->color_c[1], data->color_c[2]);
 
-	for(int i = 0; data->map[i]; i++)
-	{
-		for(int j = 0; data->map[i][j]; j++)
-		{
-			write(1, &data->map[i][j], 1);
-		}
-		write(1, "\n", 1);
-	}
-	printf("x_pos = %f\ny_pos = %f\nplayer angle = %f\n", data->x_pos, data->y_pos, data->angle);
-}
+// 	for(int i = 0; data->map[i]; i++)
+// 	{
+// 		for(int j = 0; data->map[i][j]; j++)
+// 		{
+// 			write(1, &data->map[i][j], 1);
+// 		}
+// 		write(1, "\n", 1);
+// 	}
+// 	printf("x_pos = %f\ny_pos = %f\nplayer angle = %f\n", data->x_pos, data->y_pos, data->angle);
+// }
 
 void	parsing(t_struct *data, char *file)
 {
@@ -119,6 +119,6 @@ void	parsing(t_struct *data, char *file)
 		free_exit(data->gc, 2, "Error\nEmpty space not surrounded by walls\n");
 	if (data->x_pos == 0 || data->y_pos == 0)
 		free_exit(data->gc, 2, "Error\nMust have spawn point\n");
-	ft_print_elements(data);
+	// ft_print_elements(data);
 	close(data->fd);
 }
