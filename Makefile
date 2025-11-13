@@ -6,7 +6,7 @@
 #    By: pespana <pespana@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 11:32:48 by vielblin          #+#    #+#              #
-#    Updated: 2025/11/13 22:43:40 by pespana          ###   ########.fr        #
+#    Updated: 2025/11/13 23:59:36 by pespana          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCLUDES = -I includes/ -I MLX42/include
 SRCS_DIR = srcs/
 OBJS_DIR = objects/
 
-FILES = main game_loop
+FILES = main game_loop textures
 
 GC_FILES = gc_malloc gc_clear gc_addback gc_init_free
 GC_DIR = gc/

@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:37:27 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/13 22:42:47 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/13 23:49:24 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ int	main(int ac, char **av)
 		mlx_close_window(data.mlx);
 		free_exit(data.gc, 1, "Error\nMLX image to window failed\n");
 	}
+	load_textures(&data);
 	mlx_loop_hook(data.mlx, game_hook, &data);
 	mlx_loop(data.mlx);
+	cleanup_textures(&data);
 	mlx_terminate(data.mlx);
 	return (free_exit(data.gc, 0, NULL), 0);
 }

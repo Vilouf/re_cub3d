@@ -59,6 +59,15 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_draw
+{
+	mlx_texture_t	*tex;
+	int				tex_x;
+	int				tex_y;
+	float			tex_step;
+	float			tex_pos;
+}	t_draw;
+
 typedef struct s_ray
 {
 	int		map_x;
@@ -78,6 +87,7 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	float	wall_x;
 	int32_t	color;
 }	t_ray;
 
@@ -95,6 +105,10 @@ typedef struct s_struct
 	char		**map;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_texture_t	*tex_no;
+	mlx_texture_t	*tex_so;
+	mlx_texture_t	*tex_we;
+	mlx_texture_t	*tex_ea;
 	float		x_pos;
 	float		y_pos;
 	float		dir_x;
@@ -142,5 +156,9 @@ int		is_map_valid(t_struct *data);
 
 // game
 void	game_hook(void *param);
+
+//textures
+void	load_textures(t_struct *data);
+void	cleanup_textures(t_struct *data);
 
 #endif
