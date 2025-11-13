@@ -17,6 +17,10 @@
 #  define BUFFER_SIZE 1
 # endif
 
+# ifndef WIN_HEIGHT
+#  define WIN_HEIGHT 768
+# endif
+
 # ifndef WIN_WIDTH
 #  define WIN_WIDTH 1024
 # endif
@@ -27,14 +31,6 @@
 
 # ifndef ROT_SPEED
 #  define ROT_SPEED 0.03
-# endif
-
-# ifndef WIN_HEIGHT
-# define WIN_HEIGHT 768
-# endif
-
-# ifndef KEY_ESC
-#  define KEY_ESC 65307
 # endif
 
 # include <stdio.h>

@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 22:34:18 by pespana           #+#    #+#             */
-/*   Updated: 2025/11/13 22:50:59 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/13 23:22:25 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,60 +175,6 @@ static void	handle_movement(t_struct *data)
 		}
 	}
 }
-
-// static void	move_forward_backward(t_struct *data)
-// {
-// 	float	new_x;
-// 	float	new_y;
-
-// 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-// 	{
-// 		new_x = data->x_pos + data->dir_x * MOVE_SPEED;
-// 		new_y = data->y_pos + data->dir_y * MOVE_SPEED;
-// 		if (data->map[(int)new_y][(int)new_x] != '1')
-// 		{
-// 			data->x_pos = new_x;
-// 			data->y_pos = new_y;
-// 		}
-// 	}
-// 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-// 	{
-// 		new_x = data->x_pos - data->dir_x * MOVE_SPEED;
-// 		new_y = data->y_pos - data->dir_y * MOVE_SPEED;
-// 		if (data->map[(int)new_y][(int)new_x] != '1')
-// 		{
-// 			data->x_pos = new_x;
-// 			data->y_pos = new_y;
-// 		}
-// 	}
-// }
-
-// static void	move_strafe(t_struct *data)
-// {
-// 	float	new_x;
-// 	float	new_y;
-
-// 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-// 	{
-// 		new_x = data->x_pos - data->plane_x * MOVE_SPEED;
-// 		new_y = data->y_pos - data->plane_y * MOVE_SPEED;
-// 		if (data->map[(int)new_y][(int)new_x] != '1')
-// 		{
-// 			data->x_pos = new_x;
-// 			data->y_pos = new_y;
-// 		}
-// 	}
-// 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-// 	{
-// 		new_x = data->x_pos + data->plane_x * MOVE_SPEED;
-// 		new_y = data->y_pos + data->plane_y * MOVE_SPEED;
-// 		if (data->map[(int)new_y][(int)new_x] != '1')
-// 		{
-// 			data->x_pos = new_x;
-// 			data->y_pos = new_y;
-// 		}
-// 	}
-// }
 
 static void	rotate_player(t_struct *data, float angle)
 {

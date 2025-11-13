@@ -1,13 +1,13 @@
-EA ./texture4.jsp
-NO ./texture1.jsp
-SO ./texture2.jsp
-WE ./texture3.jsp
+EA ./home/pespana/Downloads/beautiful-bengal-cat.jpg
+NO ./home/pespana/Downloads/nationalgeographic_1468962.webp
+SO ./home/pespana/Downloads/nationalgeographic_1468962.webp
+WE ./home/pespana/Downloads/beautiful-bengal-cat.jpg
 
 
-F    25   5,3,55
+C 255,255,255
 
 
-C 1,1,1 45
+F 0,0,0
 
 
 1111111111111111111111111111
