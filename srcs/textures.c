@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 23:46:14 by pespana           #+#    #+#             */
-/*   Updated: 2025/11/13 23:46:42 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/26 10:43:17 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ void	load_textures(t_struct *data)
 	data->tex_no = mlx_load_png(data->txt_no);
 	if (!data->tex_no)
 		free_exit(data->gc, 1, "Error\nFailed to load NO texture\n");
-	
 	data->tex_so = mlx_load_png(data->txt_so);
 	if (!data->tex_so)
 		free_exit(data->gc, 1, "Error\nFailed to load SO texture\n");
-
 	data->tex_we = mlx_load_png(data->txt_we);
 	if (!data->tex_we)
 		free_exit(data->gc, 1, "Error\nFailed to load WE texture\n");
-
 	data->tex_ea = mlx_load_png(data->txt_ea);
 	if (!data->tex_ea)
 		free_exit(data->gc, 1, "Error\nFailed to load EA texture\n");

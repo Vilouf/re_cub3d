@@ -6,7 +6,7 @@
 #    By: pespana <pespana@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/22 11:32:48 by vielblin          #+#    #+#              #
-#    Updated: 2025/11/14 00:21:22 by pespana          ###   ########.fr        #
+#    Updated: 2025/11/26 11:54:48 by pespana          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCLUDES = -I includes/ -I MLX42/include
 SRCS_DIR = srcs/
 OBJS_DIR = objects/
 
-FILES = main game_loop textures
+FILES = main textures
 
 GC_FILES = gc_malloc gc_clear gc_addback gc_init_free
 GC_DIR = gc/
@@ -39,7 +39,12 @@ PARSING_DIR = parsing/
 PARSING = $(addsuffix .c, $(PARSING_FILES))
 PARSING_PREF = $(addprefix $(SRCS_DIR)$(PARSING_DIR), $(PARSING))
 
-SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES))) $(GC_PREF) $(LIBFT_PREF) $(PARSING_PREF)
+GAME_FILES = game_loop handle_movement handle_rotation raycast
+GAME_DIR = game/
+GAME = $(addsuffix .c, $(GAME_FILES))
+GAME_PREF = $(addprefix $(SRCS_DIR)$(GAME_DIR), $(GAME))
+
+SRCS = $(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES))) $(GC_PREF) $(LIBFT_PREF) $(PARSING_PREF) $(GAME_PREF)
 
 OBJS = $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
 

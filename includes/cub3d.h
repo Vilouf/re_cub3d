@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vielblin <vielblin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/10/31 10:443:566 by vielblin         ###   ########.fr       */
+/*   Updated: 2025/11/26 12:01:20 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,72 +93,82 @@ typedef struct s_ray
 
 typedef struct s_struct
 {
-	t_gc		*gc;
-	t_list		*lst_map;
-	int			fd;
-	char		*txt_no;
-	char		*txt_so;
-	char		*txt_we;
-	char		*txt_ea;
-	int			color_f[3];
-	int			color_c[3];
-	char		**map;
-	mlx_t		*mlx;
-	mlx_image_t	*img;
+	t_gc			*gc;
+	t_list			*lst_map;
+	int				fd;
+	char			*txt_no;
+	char			*txt_so;
+	char			*txt_we;
+	char			*txt_ea;
+	int				color_f[3];
+	int				color_c[3];
+	char			**map;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
 	mlx_texture_t	*tex_no;
 	mlx_texture_t	*tex_so;
 	mlx_texture_t	*tex_we;
 	mlx_texture_t	*tex_ea;
-	float		x_pos;
-	float		y_pos;
-	float		dir_x;
-	float		dir_y;
-	float		plane_x;
-	float		plane_y;
+	float			x_pos;
+	float			y_pos;
+	float			dir_x;
+	float			dir_y;
+	float			plane_x;
+	float			plane_y;
 }	t_struct;
 
 //garbage collector
-void		gc_addback(t_gc_leaf **gc, t_gc_leaf *new);
-void		*gc_malloc(t_gc *gc, size_t size);
-void		gc_clear(t_gc_leaf **gc);
-void		init_gc(t_gc **gc);
-void		free_exit(t_gc *gc, int exit_status, char *message);
-t_gc_leaf	*gc_lstnew(void *data);
+void			gc_addback(t_gc_leaf **gc, t_gc_leaf *new);
+void			*gc_malloc(t_gc *gc, size_t size);
+void			gc_clear(t_gc_leaf **gc);
+void			init_gc(t_gc **gc);
+void			free_exit(t_gc *gc, int exit_status, char *message);
+t_gc_leaf		*gc_lstnew(void *data);
 
 //libft
-void	ft_free(void *ntpr);
-void	*ft_memset(void *s, int c, size_t n);
-char	*get_next_line(int fd);
-char	*ft_strchr2(const char *s, int c);
-char	*ft_strjoin2(char *s1, char *s2);
-size_t	ft_strlen2(const char *s);
-int		ft_strlen(char *s);
-char	*ft_substr2(char const *s, unsigned int start, size_t len);
-void	*ft_calloc2(size_t count, size_t size);
-void	ft_putstr_fd(char *s, int fd);
-char	*ft_substr(t_gc *gc, char const *s, unsigned int start, size_t len);
-char	**ft_split(char const *s, char c, t_gc *gc);
-int		ft_strcmp(char *s1, char *s2);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-int		ft_atoi(const char *nptr);
-char	*ft_strdup(t_gc *gc, const char *s);
-t_list	*ft_lstnew(t_gc *gc, void *content);
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void			ft_free(void *ntpr);
+void			*ft_memset(void *s, int c, size_t n);
+char			*get_next_line(int fd);
+char			*ft_strchr2(const char *s, int c);
+char			*ft_strjoin2(char *s1, char *s2);
+size_t			ft_strlen2(const char *s);
+int				ft_strlen(char *s);
+char			*ft_substr2(char const *s, unsigned int start, size_t len);
+void			*ft_calloc2(size_t count, size_t size);
+void			ft_putstr_fd(char *s, int fd);
+char			*ft_substr(t_gc *gc, char const *s,\
+							unsigned int start, size_t len);
+char			**ft_split(char const *s, char c, t_gc *gc);
+int				ft_strcmp(char *s1, char *s2);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+int				ft_atoi(const char *nptr);
+char			*ft_strdup(t_gc *gc, const char *s);
+t_list			*ft_lstnew(t_gc *gc, void *content);
+void			ft_lstadd_back(t_list **lst, t_list *new);
 
 // parsing
-void	parsing(t_struct *data, char *file);
-int		check_id(t_struct *data, char **words);
-int		check_data(t_struct *data);
-int		get_color(t_struct *data, char **tab, int type);
-int		is_spawn_point(char c);
-void	parse_map(t_struct *data);
-int		is_map_valid(t_struct *data);
+void			parsing(t_struct *data, char *file);
+int				check_id(t_struct *data, char **words);
+int				check_data(t_struct *data);
+int				get_color(t_struct *data, char **tab, int type);
+int				is_spawn_point(char c);
+void			parse_map(t_struct *data);
+int				is_map_valid(t_struct *data);
 
 // game
-void	game_hook(void *param);
+void			game_hook(void *param);
+void			handle_movement(t_struct *data);
+void			raycast_walls(t_struct *data);
+void			handle_rotation(t_struct *data);
+void			draw_floor_and_ceiling(t_struct *data);
+mlx_texture_t	*select_texture(t_struct *data, t_ray *ray);
+int32_t			get_pixel_color(mlx_texture_t *tex, int x, int y);
+int32_t			get_rgba(int r, int g, int b, int a);
+void			calc_step(t_struct *data, t_ray *ray);
+void			init_ray(t_struct *data, t_ray *ray, int x);
 
 //textures
-void	load_textures(t_struct *data);
-void	cleanup_textures(t_struct *data);
+void			load_textures(t_struct *data);
+void			cleanup_textures(t_struct *data);
 
 #endif

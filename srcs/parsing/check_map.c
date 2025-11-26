@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:34:34 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/13 22:25:46 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/26 11:01:40 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,9 @@ static int	check_walls(t_struct *data, int x, int y)
 	return (1);
 }
 
-static int	set_player_data(t_struct *data, int x, int y)
+void	set_player_data2(t_struct *data, int x, int y)
 {
-	if (!check_walls(data, x, y))
-		return (0);
-	if (data->x_pos != 0 || data->y_pos != 0)
-		free_exit(data->gc, 2, "Error\nMore than one spawn point\n");
-	data->x_pos = (float)x + 0.5;
-	data->y_pos = (float)y + 0.5;
-	if (data->map[y][x] == 'N')
-	{
-		data->dir_x = 0;
-		data->dir_y = -1;
-		data->plane_x = 0.66;
-		data->plane_y = 0;
-	}
-	else if (data->map[y][x] == 'S')
+	if (data->map[y][x] == 'S')
 	{
 		data->dir_x = 0;
 		data->dir_y = 1;
@@ -74,6 +61,24 @@ static int	set_player_data(t_struct *data, int x, int y)
 		data->plane_x = 0;
 		data->plane_y = 0.66;
 	}
+}
+
+static int	set_player_data(t_struct *data, int x, int y)
+{
+	if (!check_walls(data, x, y))
+		return (0);
+	if (data->x_pos != 0 || data->y_pos != 0)
+		free_exit(data->gc, 2, "Error\nMore than one spawn point\n");
+	data->x_pos = (float)x + 0.5;
+	data->y_pos = (float)y + 0.5;
+	if (data->map[y][x] == 'N')
+	{
+		data->dir_x = 0;
+		data->dir_y = -1;
+		data->plane_x = 0.66;
+		data->plane_y = 0;
+	}
+	set_player_data2(data, x, y);
 	return (1);
 }
 
