@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:15 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/28 19:52:59 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/28 20:05:01 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static void	read_data(t_struct *data, int fd)
 	if (!check_data(data))
 	{
 		ft_free(line);
+		if (data->fd > 0)
+			close(data->fd);
 		free_exit(data->gc, 2, "Error\nInvalid Data\n");
 	}
 	read_map(data, line, fd);
