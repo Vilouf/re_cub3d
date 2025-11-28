@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:15 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/26 11:03:32 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/28 19:37:28 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	check_map_extention(t_struct *data, char *file)
 	int	len;
 
 	len = ft_strlen(file);
-	if (ft_strcmp(&file[len - 4], ".cub") != 0)
+	if (len < 4 || ft_strcmp(&file[len - 4], ".cub") != 0)
 		free_exit(data->gc, 1, "Error\nWrong file extention\n");
 }
 
