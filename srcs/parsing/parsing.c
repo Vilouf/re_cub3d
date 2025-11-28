@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:07:15 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/28 19:37:28 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/28 19:52:59 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	read_map(t_struct *data, char *line, int fd)
 		if (!check_map(data, line))
 		{
 			ft_free(line);
-			free_exit(data->gc, 2, "Error\nBBBBBInvalid Map\n");
+			free_exit(data->gc, 2, "Error\nInvalid Map\n");
 		}
 		ft_free(line);
 		line = get_next_line(fd);
@@ -80,7 +80,7 @@ static void	read_data(t_struct *data, int fd)
 	if (!check_data(data))
 	{
 		ft_free(line);
-		free_exit(data->gc, 2, "Error\nAAAAInvalid Data\n");
+		free_exit(data->gc, 2, "Error\nInvalid Data\n");
 	}
 	read_map(data, line, fd);
 }
@@ -94,8 +94,16 @@ void	parsing(t_struct *data, char *file)
 	read_data(data, data->fd);
 	parse_map(data);
 	if (!is_map_valid(data))
+	{
+		if (data->fd > 0)
+			close(data->fd);
 		free_exit(data->gc, 2, "Error\nEmpty space not surrounded by walls\n");
+	}
 	if (data->x_pos == 0 || data->y_pos == 0)
+	{
+		if (data->fd > 0)
+			close(data->fd);
 		free_exit(data->gc, 2, "Error\nMust have spawn point\n");
+	}
 	close(data->fd);
 }
