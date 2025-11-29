@@ -6,42 +6,11 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:18:50 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/26 11:43:39 by pespana          ###   ########.fr       */
+/*   Updated: 2025/11/29 18:15:23 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// static int	check_direction(t_struct *data, char **words)
-// {
-// 	if (!ft_strcmp(words[0], "NO"))
-// 	{
-// 		if (data->txt_no != NULL)
-// 			return (data->txt_no = NULL, 0);
-// 		data->txt_no = ft_strdup(data->gc, words[1]);
-// 	}
-// 	else if (!ft_strcmp(words[0], "SO"))
-// 	{
-// 		if (data->txt_so != NULL)
-// 			return (data->txt_so = NULL, 0);
-// 		data->txt_so = ft_strdup(data->gc, words[1]);
-// 	}
-// 	else if (!ft_strcmp(words[0], "WE"))
-// 	{
-// 		if (data->txt_we != NULL)
-// 			return (data->txt_we = NULL, 0);
-// 		data->txt_we = ft_strdup(data->gc, words[1]);
-// 	}
-// 	else if (!ft_strcmp(words[0], "EA"))
-// 	{
-// 		if (data->txt_ea != NULL)
-// 			return (data->txt_ea = NULL, 0);
-// 		data->txt_ea = ft_strdup(data->gc, words[1]);
-// 	}
-// 	else
-// 		return (0);
-// 	return (1);
-// }
 
 static int	set_texture(t_struct *data, char **target, char *path)
 {
