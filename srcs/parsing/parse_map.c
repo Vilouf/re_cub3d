@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:32:29 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/14 00:52:02 by pespana          ###   ########.fr       */
+/*   Updated: 2025/12/02 21:00:12 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*set_map_line(char *line, int x, t_gc *gc)
 		if (i < ft_strlen(line) && line[i] != ' ')
 			ret[i] = line[i];
 		else
-			ret[i] = '1';
+			ret[i] = ' ';
 		i++;
 	}
 	ret[i] = 0;

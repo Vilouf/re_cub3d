@@ -6,7 +6,7 @@
 /*   By: pespana <pespana@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 11:35:38 by vielblin          #+#    #+#             */
-/*   Updated: 2025/11/28 20:12:09 by pespana          ###   ########.fr       */
+/*   Updated: 2025/12/02 20:53:54 by pespana          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # endif
 
 # ifndef ROT_SPEED
-#  define ROT_SPEED 0.03
+#  define ROT_SPEED 0.04
 # endif
 
 # include <stdio.h>
